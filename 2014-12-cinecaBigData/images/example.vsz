@@ -1,0 +1,344 @@
+# Veusz saved document (version 1.15)
+# Saved at 2014-12-17T18:09:43.390762
+
+AddImportPath(u'/home/ziosi/Dropbox/Research/PhD_Mapelli/Presentations/PresentationsPrivate/group_meetings/2014-12-cinecaBigData/images')
+ImportString('xScatterData(numeric)','''
+0.000000e+00
+1.000000e+00
+2.000000e+00
+3.000000e+00
+4.000000e+00
+5.000000e+00
+6.000000e+00
+7.000000e+00
+8.000000e+00
+9.000000e+00
+1.000000e+01
+1.100000e+01
+1.200000e+01
+1.300000e+01
+1.400000e+01
+1.500000e+01
+1.600000e+01
+1.700000e+01
+1.800000e+01
+1.900000e+01
+2.000000e+01
+2.100000e+01
+2.200000e+01
+2.300000e+01
+2.400000e+01
+2.500000e+01
+2.600000e+01
+2.700000e+01
+2.800000e+01
+2.900000e+01
+3.000000e+01
+3.100000e+01
+3.200000e+01
+3.300000e+01
+3.400000e+01
+3.500000e+01
+3.600000e+01
+3.700000e+01
+3.800000e+01
+3.900000e+01
+4.000000e+01
+4.100000e+01
+4.200000e+01
+4.300000e+01
+4.400000e+01
+4.500000e+01
+4.600000e+01
+4.700000e+01
+4.800000e+01
+4.900000e+01
+5.000000e+01
+5.100000e+01
+5.200000e+01
+5.300000e+01
+5.400000e+01
+5.500000e+01
+5.600000e+01
+5.700000e+01
+5.800000e+01
+5.900000e+01
+6.000000e+01
+6.100000e+01
+6.200000e+01
+6.300000e+01
+6.400000e+01
+6.500000e+01
+6.600000e+01
+6.700000e+01
+6.800000e+01
+6.900000e+01
+7.000000e+01
+7.100000e+01
+7.200000e+01
+7.300000e+01
+7.400000e+01
+7.500000e+01
+7.600000e+01
+7.700000e+01
+7.800000e+01
+7.900000e+01
+8.000000e+01
+8.100000e+01
+8.200000e+01
+8.300000e+01
+8.400000e+01
+8.500000e+01
+8.600000e+01
+8.700000e+01
+8.800000e+01
+8.900000e+01
+9.000000e+01
+9.100000e+01
+9.200000e+01
+9.300000e+01
+9.400000e+01
+9.500000e+01
+9.600000e+01
+9.700000e+01
+9.800000e+01
+9.900000e+01
+''')
+ImportString('yScatterData(numeric)','''
+1.000000e+01
+9.684147e+01
+7.990930e+01
+9.914112e+01
+4.724320e+01
+1.804108e+01
+8.572058e+01
+4.865699e+01
+6.898936e+01
+9.241212e+01
+1.345598e+01
+3.900001e+01
+5.746343e+01
+8.420167e+00
+6.990607e+00
+6.065029e+01
+3.171210e+01
+9.203860e+01
+5.249013e+00
+1.514988e+01
+3.691295e+01
+5.836656e+00
+4.099115e+01
+1.153780e+00
+5.409442e+01
+1.986765e+01
+7.625585e-01
+8.595638e+01
+5.270906e+00
+5.733637e+01
+2.301197e+01
+9.659596e+01
+7.155143e+01
+9.899991e+01
+8.529083e+00
+9.057182e+01
+4.800822e+01
+4.335646e+01
+4.329637e+01
+7.896380e+01
+8.774511e+01
+5.384138e+01
+1.083478e+00
+4.016823e+01
+6.401770e+01
+1.185090e+01
+6.090179e+01
+1.312357e+01
+3.231745e+00
+8.804625e+01
+4.673763e+01
+1.367023e+01
+7.998663e+01
+8.739593e+01
+4.441211e+00
+2.700024e+01
+9.047845e+01
+4.343616e+01
+6.299287e+01
+1.363674e+01
+3.669519e+01
+8.103388e+01
+8.926082e+01
+1.116736e+01
+1.592003e+01
+3.782683e+01
+8.097345e+01
+6.614448e+01
+5.102072e+00
+9.888522e+01
+3.277389e+01
+6.495105e+01
+6.025382e+01
+8.323228e+00
+1.701485e+01
+9.661222e+01
+9.566108e+00
+9.099952e+01
+8.351398e+01
+6.055589e+01
+6.600611e+01
+9.737011e+01
+5.531323e+01
+3.496836e+01
+5.373319e+01
+3.682392e+01
+7.307654e+01
+7.317818e+01
+1.303540e+01
+4.386007e+01
+8.939967e-01
+5.210599e+01
+9.822053e+01
+1.005172e+01
+8.075475e+01
+6.568326e+01
+4.598359e+01
+1.437961e+01
+6.426618e+00
+1.600079e+01
+''')
+Add('page', name='page1', autoadd=False)
+To('page1')
+Set('width', '30cm')
+Set('height', '15cm')
+Add('grid', name='grid1', autoadd=False)
+To('grid1')
+Set('rows', 1)
+Set('columns', 2)
+Set('scaleRows', [0.2])
+Set('topMargin', '1cm')
+Set('bottomMargin', '1cm')
+Add('graph', name='scatter', autoadd=False)
+To('scatter')
+Set('hide', False)
+Set('leftMargin', '0.6cm')
+Set('rightMargin', '0.4cm')
+Set('topMargin', '0.5cm')
+Set('bottomMargin', '1cm')
+Set('Border/width', '2pt')
+Add('axis', name='x', autoadd=False)
+To('x')
+Set('label', 'x')
+Set('min', 'Auto')
+Set('max', 'Auto')
+Set('log', False)
+Set('Label/font', 'Times New Roman')
+Set('Label/size', '25pt')
+Set('TickLabels/size', '17pt')
+Set('TickLabels/format', u'Auto')
+Set('MajorTicks/width', '2pt')
+Set('MajorTicks/length', '10pt')
+Set('MinorTicks/width', '1pt')
+Set('MinorTicks/length', '6pt')
+To('..')
+Add('axis', name='y', autoadd=False)
+To('y')
+Set('label', 'y')
+Set('min', 'Auto')
+Set('max', 'Auto')
+Set('log', False)
+Set('autoRange', u'+5%')
+Set('direction', 'vertical')
+Set('Label/font', 'Times New Roman')
+Set('Label/size', '25pt')
+Set('TickLabels/size', '20pt')
+Set('TickLabels/format', u'Auto')
+Set('MajorTicks/width', '2pt')
+Set('MajorTicks/length', '10pt')
+Set('MinorTicks/width', '1pt')
+Set('MinorTicks/length', '6pt')
+To('..')
+Add('xy', name='scatterPlotName', autoadd=False)
+To('scatterPlotName')
+Set('xData', 'xScatterData')
+Set('yData', 'yScatterData')
+Set('marker', u'circle')
+Set('markerSize', u'3pt')
+Set('key', 'scatterPlotKey')
+Set('MarkerFill/color', u'blue')
+To('..')
+To('..')
+Add('graph', name='hist', autoadd=False)
+To('hist')
+Set('hide', False)
+Set('leftMargin', '2cm')
+Set('rightMargin', '0.4cm')
+Set('topMargin', '0.5cm')
+Set('bottomMargin', '1cm')
+Set('Border/width', '2pt')
+Add('axis', name='x', autoadd=False)
+To('x')
+Set('label', 'x')
+Set('min', 'Auto')
+Set('max', 'Auto')
+Set('log', False)
+Set('Label/font', 'Times New Roman')
+Set('Label/size', '25pt')
+Set('TickLabels/size', '17pt')
+Set('TickLabels/format', u'Auto')
+Set('MajorTicks/width', '2pt')
+Set('MajorTicks/length', '10pt')
+Set('MinorTicks/width', '1pt')
+Set('MinorTicks/length', '6pt')
+To('..')
+Add('axis', name='y', autoadd=False)
+To('y')
+Set('label', 'y')
+Set('min', 0.0)
+Set('max', 'Auto')
+Set('log', False)
+Set('autoRange', u'+5%')
+Set('direction', 'vertical')
+Set('Label/font', 'Times New Roman')
+Set('Label/size', '25pt')
+Set('TickLabels/size', '20pt')
+Set('TickLabels/format', u'Auto')
+Set('MajorTicks/width', '2pt')
+Set('MajorTicks/length', '10pt')
+Set('MinorTicks/width', '1pt')
+Set('MinorTicks/length', '6pt')
+To('..')
+Add('xy', name='histPlotName', autoadd=False)
+To('histPlotName')
+Set('xData', [0.0, 0.0, 5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0, 80.0, 85.0, 90.0, 95.0, 100.0, 100.0])
+Set('yData', [0.0, 6.0, 10.0, 10.0, 6.0, 1.0, 1.0, 3.0, 5.0, 6.0, 5.0, 4.0, 3.0, 7.0, 4.0, 3.0, 3.0, 4.0, 6.0, 5.0, 8.0, 0.0, 0.0])
+Set('marker', 'none')
+Set('key', 'histPlotKey')
+Set('PlotLine/steps', u'left')
+Set('PlotLine/color', u'green')
+Set('PlotLine/width', u'3')
+Set('PlotLine/style', u'solid')
+Set('FillBelow/color', u'green')
+Set('FillBelow/style', 'forward 2')
+Set('FillBelow/hide', False)
+Set('FillBelow/transparency', 70)
+Set('FillBelow/linewidth', '1pt')
+Set('FillBelow/linestyle', 'solid')
+Set('FillBelow/backcolor', 'white')
+Set('FillBelow/backhide', True)
+Set('Label/posnHorz', 'right')
+Set('Label/size', '14pt')
+Set('Label/color', 'black')
+To('..')
+Add('key', name='key1', autoadd=False)
+To('key1')
+Set('Text/font', 'Times New Roman')
+Set('Text/size', '15')
+Set('Border/width', '1.5pt')
+Set('horzPosn', 'right')
+Set('vertPosn', 'top')
+Set('horzManual', 0.0)
+Set('vertManual', 0.0)
+To('..')
+To('..')
+To('..')
+To('..')
