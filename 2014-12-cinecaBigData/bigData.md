@@ -480,12 +480,23 @@ class:middle
 
 * Create the image by running [build](https://docs.docker.com/reference/commandline/cli/#build) (the final dot is a path, not a typo)
 ```bash
-docker build --force-rm=true -t brunetto/starlabGPU:$(date +"%Y%m%d") .
+time docker build --force-rm=true -t \
+	brunetto/starlab-pub-cuda-340.46-6.0.37:$(date +"%Y%m%d") .
 ```
 * Check
+
 ```bash
-docker images
+$ docker images
+REPOSITORY                                   TAG                 IMAGE ID            
+brunetto/starlab-public-cuda-340.46-6.0.37   20141221            b073d414323f        
+											CREATED             VIRTUAL SIZE
+											37 minutes ago      5.272 GB
+
+...
 ```
+---
+class:middle
+### Example: StarLab
 
 * Create and start a container based on the new image    
 (separate commands exist)
@@ -494,21 +505,32 @@ $ docker run -ti    --device /dev/nvidia0:/dev/nvidia0 \
 					--device /dev/nvidia1:/dev/nvidia1 \
 					--device /dev/nvidiactl:/dev/nvidiactl \
 					--device /dev/nvidia-uvm:/dev/nvidia-uvm \
-					-v       ~/starlab-results: /starlab-results \
-					         brunetto/cuda2:20141218
+					-v       ~/starlab-results:/starlab-results \
+					         brunetto/starlab-pub-cuda-340.46-6.0.37
 ```
----
-class:middle
-### Example: StarLab
+
 * Check
+
 ```bash
 docker ps [-a]
+
+CONTAINER ID        IMAGE                                              
+ccdffc10c680        brunetto/starlab-pub-cuda-340.46-6.0.37:20141221   
+                     COMMAND             CREATED             
+                     "/bin/bash"         15 seconds ago    
+                     STATUS              PORTS               NAMES
+                     Up 15 seconds                           adoring_turing 
 ```
+---
+class: middle
+### Other
 
 * Useful commands
 ```bash
-docker start, stop, rm, rmi
+docker create, start, attach, stop, rm, rmi, push, pull, tag
 ```
+
+* [Registry/repository](https://registry.hub.docker.com)
 
 * Docs: [command line](https://docs.docker.com/reference/commandline/cli/), [all](http://docs.docker.com/), [me](https://github.com/brunetto/docker-cheat-sheet)
 
