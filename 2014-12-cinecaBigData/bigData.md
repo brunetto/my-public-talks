@@ -104,7 +104,7 @@ class: middle
 
 ## MapReduce/Hadoop
 
-* MapReduce: paradigm formalized by Goole
+* MapReduce: paradigm formalized by Google
 * Hadoop: open source implementation
 * The idea: 
 
@@ -385,7 +385,7 @@ class: middle
 
 * No need to get mad to install an app
 
-* Based on `lxc` ([linux containers](http://en.wikipedia.org/wiki/LXC)) + Go
+* Based on `lxc` ([linux containers](http://en.wikipedia.org/wiki/LXC)) and Go
 
 * No virtual machines $\rightarrow$ lightweight
 
@@ -397,6 +397,11 @@ class: middle
 
 
 .small[.right[*(loose memory on shutdown)]]
+---
+
+## Docker structure
+
+![docker structure](images/docker_structure.png)
 
 ---
 class:middle
@@ -475,7 +480,7 @@ class:middle
 
 * Create the image by running [build](https://docs.docker.com/reference/commandline/cli/#build) (the final dot is a path, not a typo)
 ```bash
-docker build --force-rm=false -t brunetto/starlabGPU:$(date +"%Y%m%d") .
+docker build --force-rm=true -t brunetto/starlabGPU:$(date +"%Y%m%d") .
 ```
 * Check
 ```bash
