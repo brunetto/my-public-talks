@@ -1,8 +1,10 @@
 class: middle, center
 
 background-image: url(images/background.svg)
-
-.big[# **Big Data**]
+### (Not only)
+.big[
+# **Big Data**
+]
 
 ---
 class: middle
@@ -46,6 +48,7 @@ class: middle
 
 * Cineca
 * Coursera
+* The internet
 * Me :P
 
 ## Disclaimer
@@ -54,7 +57,8 @@ class: middle
 * I can be wrong
 * I can be not precise
 * I can be no neutral/impartial/unbiased
-* This presentation started as a summary of a Big Data workshop and expanded
+* This presentation started as a summary of a Big Data workshop and then expanded
+* Practical, non theoretical, approach
 
 ---
 ## Big Data?
@@ -457,6 +461,14 @@ Out[5]: PythonRDD[3] at RDD at PythonRDD.scala:43
 In [6]: even.collect() # now the computation is launched
 ...
 ```
+
+---
+class: middle
+### Example: [SKA software](https://speakerdeck.com/gijzelaerr/docker-and-radio-astronomy)
+
+.center[![SKA](images/docker-ska.png)]
+
+
 ---
 class:middle
 ### Example: StarLab
@@ -521,20 +533,78 @@ ccdffc10c680        brunetto/starlab-pub-cuda-340.46-6.0.37:20141221
                      STATUS              PORTS               NAMES
                      Up 15 seconds                           adoring_turing 
 ```
----
-class: middle
-### Other
 
-* Useful commands
+---
+### Example: StarLab
+
 ```bash
-docker create, start, attach, stop, rm, rmi, push, pull, tag
+#!/bin/bash
+set -x
+# Create a docker container with devices and volumes and git it a name
+
+# LOCAL_FOLDER=~/starlab-results
+# DOCKER_FOLDER=/starlab-results
+
+docker create --name sltest -i -t \
+--device /dev/nvidia0:/dev/nvidia0 \
+--device /dev/nvidia1:/dev/nvidia1 \
+--device /dev/nvidiactl:/dev/nvidiactl \
+--device /dev/nvidia-uvm:/dev/nvidia-uvm \
+brunetto/starlab-mapelli-dockerfile:latest
+
+# With exchange folder
+* # -v $LOCAL_FOLDER:$OCKER_FOLDER \
+
+# Start the container
+docker start sltest
+```
+---
+### Example: StarLab
+
+```bash
+# Exec commands to create ICs
+(docker exec -i sltest /slbin/makeking -n 100 -w 5 -i -u ) > makeking.out
+(docker exec -i sltest /slbin/makemass -f 8 -l 0.1 -u 40 ) \
+< makeking.out > makemass.out
+(docker exec -i sltest /slbin/add_star -R 1 -Z 0.1       ) \
+< makemass.out > add_star.out
+(docker exec -i sltest /slbin/scale -R 1 -M 1            ) \
+< add_star.out > ics.txt
+
+# Start kira: two ways, note the difference!!!
+(docker exec -i sltest /slbin/kira -t 3 -d 1 -D 1 -f 0 -n 10 -e 0 -B -b 1) \
+< ics.txt > out.txt 2> err.txt
+
+* # docker exec -i sltest bash -c "/slbin/kira -t 3 -d 1 -D 1 -f 0 \
+* # -n 10 -e 0 -B -b 1 < /starlab-results/ics.txt \
+* # > /starlab-results/out.txt 2> /starlab-results/err.txt"
+
+docker stop sltest
+docker rm sltest
+
 ```
 
-* [Registry/repository](https://registry.hub.docker.com)
+---
+class: middle
 
-* Docs: [command line](https://docs.docker.com/reference/commandline/cli/), [all](http://docs.docker.com/), [me](https://github.com/brunetto/docker-cheat-sheet)
+### Run a dockerized command
+
+```bash
+$ time echo "Hello world"
+Hello world
+real    0m0.000s
+user    0m0.000s
+sys     0m0.000s
+
+$ time docker run ubuntu:14.04 /bin/echo 'Hello world'
+Hello world
+real    0m0.219s
+user    0m0.028s
+sys     0m0.005s
+```
 
 ---
+
 ### Install Docker 
 .citation[see [here](https://github.com/brunetto/docker-cheat-sheet#linux)]
 
@@ -555,6 +625,35 @@ sudo gpasswd -a ${USER} docker
 sudo service docker restart
 ```
 then logout and login again.
+
+---
+class: middle
+### Useful commands
+
+`docker` [attach](https://docs.docker.com/reference/commandline/cli/#attach), 
+[create](https://docs.docker.com/reference/commandline/cli/#create), 
+[exec](https://docs.docker.com/reference/commandline/cli/#exec), 
+[inspect](https://docs.docker.com/reference/commandline/cli/#inspect),
+[logs](https://docs.docker.com/reference/commandline/cli/#logs),
+[push](https://docs.docker.com/reference/commandline/cli/#push), 
+[pull](https://docs.docker.com/reference/commandline/cli/#pull), 
+[rm](https://docs.docker.com/reference/commandline/cli/#rm), 
+[rmi](https://docs.docker.com/reference/commandline/cli/#rmi), 
+[run](https://docs.docker.com/reference/commandline/cli/#run), 
+[start](https://docs.docker.com/reference/commandline/cli/#start), 
+[stop](https://docs.docker.com/reference/commandline/cli/#stop), 
+[tag](https://docs.docker.com/reference/commandline/cli/#tag)
+
+
+### Other resources
+
+* [Registry/repository](https://registry.hub.docker.com)
+
+* Docs: [command line](https://docs.docker.com/reference/commandline/cli/), [all](http://docs.docker.com/), [me](https://github.com/brunetto/docker-cheat-sheet)
+
+* [Memory consumption](http://stackoverflow.com/questions/24702233/docker-container-and-memory-consumption)
+
+* [Docker baseimages](http://phusion.github.io/baseimage-docker/#intro)
 
 ---
 class: middle
@@ -849,7 +948,21 @@ close(fileNameChan)
 * Super-active [community](https://groups.google.com/forum/#!forum/golang-nuts)
 
 ---
+## Example: [sltools]()
+
+![sltools](images/sltools.svg)
+
+---
+## Example: [MuMax3](http://mumax.github.io/)
+
+* MuMax, a general-purpose micromagnetic simulation tool running on Graphical Processing Units (GPUs). 
+* [paper](http://arxiv.org/pdf/1102.3069.pdf), [talk](https://www.youtube.com/watch?v=MnVFpo3rkek), [at FOSDEM](https://archive.fosdem.org/2014/schedule/event/hpc_devroom_go/)
+
+.center[![mumax](images/mumax.png)]
+
+---
 class: middle
+
 ### Bye
 
 ```go
@@ -872,6 +985,9 @@ func main() {
 
 ---
 class: middle
+name: appendix
+
+
 Brunetto Ziosi
 <brunetto.ziosi@gmail.com>    
 [https://github.com/brunetto](https://github.com/brunetto)    
