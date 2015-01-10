@@ -367,6 +367,122 @@ class: middle
 	$\Rightarrow$ **Impala + Numba**
 
 
+---
+class: middle
+
+.center[
+## Pool and parallel workers
+]
+
+* Not MapReduce
+* But...
+* The idea: 
+
+.center[
+a lot of Minions taking data to process in a common basket, 
+work on it and put the results in another common basket.
+]
+
+---
+class: middle
+
+```python 
+#!/usr/bin/env python
+# -*- coding: utf8 -*- 
+
+import glob, os, sys, time
+
+import subprocess as sp #(Popen, PIPE, ...)
+import multiprocessing as mp #(Process, Queue, ....)
+
+# Initialize queues (pools)
+file_queue = mp.Queue()
+output_queue = mp.Queue()
+
+# Set the max number of processes
+n_procs = 3
+```
+
+---
+class: middle
+
+```python
+# Define your job
+def worker(input, output):
+	while input.qsize() != 0:
+	filename = input.get()
+	#
+	#=================
+	#do what you want=
+	#=================
+
+# Define the function for checking the process status
+def status(proc):
+	if proc.is_alive==True:
+		return 'alive'
+	elif proc.is_alive==False:
+		return 'dead'
+	else:
+		return proc.is_alive()
+```
+
+---
+class: middle
+
+```python
+#==========================================
+# Main
+#==========================================
+
+t = time.time()
+
+# Retrieve file names in path and put them in a queue
+for infile in glob.glob(os.path.join(path, namebase)):
+	print "processing file ", infile
+	file_queue.put(infile)
+
+# Find the number of files we have
+n_files = file_queue.qsize()
+
+# Initialize the processors list
+procs = []
+
+# Create the processes
+try:
+	for i in range(n_procs):
+		procs.append(mp.Process(target=worker, args=(file_queue,output_queue)))
+except:
+	print "Creating processes not complete, exit..."
+	sys.exit()
+
+# Start the processes
+try:
+	for i in procs:
+		i.start()
+except:
+	print "Start processes not complete, exit..."
+	sys.exit()
+```
+
+---
+class: middle
+
+```python
+	
+# Check processes status
+for i in procs:
+	print "Process ", i, " @ ", i.pid, " is ", status(i)
+
+# Wait processes to finish
+while len(procs) != 0:
+	for i in procs:
+		if status(i) == "dead":
+			procs.pop(procs.index(i))
+	# loose 10 seconds before checking again
+	time.sleep(10)
+```
+
+Note: in Python3 the `print` function is changed.
 
 ---
 background-image: url(images/docker.png)
@@ -401,6 +517,7 @@ class: middle
 
 
 .small[.right[*(loose memory on shutdown)]]
+
 ---
 
 ## Docker structure
@@ -461,7 +578,6 @@ Out[5]: PythonRDD[3] at RDD at PythonRDD.scala:43
 In [6]: even.collect() # now the computation is launched
 ...
 ```
-
 ---
 class: middle
 ### Example: [SKA software](https://speakerdeck.com/gijzelaerr/docker-and-radio-astronomy)
@@ -672,6 +788,9 @@ class: middle
 > manipulation and editing of datasets. Data can be captured from
 > external sources such as Internet sockets or other programs.
 
+------
+
+> I wrote it because I needed it. I've not found any other software as easy to use or more versatile since. There are alternative Python libraries (such as matplotlib), but the user interface on Veusz is its selling feature.
 ---
 background-image: url(images/veusz.png)
 
@@ -985,7 +1104,6 @@ func main() {
 
 ---
 class: middle
-name: appendix
 
 
 Brunetto Ziosi
@@ -993,6 +1111,6 @@ Brunetto Ziosi
 [https://github.com/brunetto](https://github.com/brunetto)    
 [brunettoziosi.eu](brunettoziosi.eu)    
 
-
+---
 
 

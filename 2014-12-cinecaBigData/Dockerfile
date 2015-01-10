@@ -6,7 +6,10 @@ MAINTAINER brunetto ziosi <brunetto.ziosi@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV STARLAB_DOWNLOAD https://www.dropbox.com/s/tzwimr7e9hrmpm1/starlabDockerPublic.tar.gz
+ENV STARLAB_FILE starlabDocker.tar.gz
+
+# Copy StarLab bundle into the image
+COPY $STARLAB_FILE /
 
 # This has to be set by hand and MUST be the same of the host
 ##############
@@ -39,44 +42,63 @@ ENV CUDA_TOOLKIT_DOWNLOAD http://developer.download.nvidia.com/compute/cuda/6_0/
 # ENV CUDA_TOOLKIT ????
 # ENV CUDA_TOOLKIT_DOWNLOAD ????????
 
-# Update and install minimal.
+# Update and install minimal and clean up packages
 RUN apt-get update --quiet && apt-get install --yes \
-            --no-install-recommends --no-install-suggests \
-       build-essential module-init-tools wget libboost-all-dev
+--no-install-recommends --no-install-suggests \
+build-essential module-init-tools wget libboost-all-dev   \
+&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Clean up packages.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install CUDA.
+# Install CUDA drivers
 RUN wget $CUDA_INSTALL -P /tmp --no-verbose \
       && chmod +x /tmp/NVIDIA-Linux-x86_64-${CUDA_DRIVER}.run \
       && /tmp/NVIDIA-Linux-x86_64-${CUDA_DRIVER}.run -s -N --no-kernel-module \
       && rm -rf /tmp/*
 
-RUN wget $CUDA_TOOLKIT_DOWNLOAD && chmod +x $CUDA_TOOLKIT
-RUN ./$CUDA_TOOLKIT -toolkit -toolkitpath=/usr/local/cuda-site -silent -override
-RUN rm $CUDA_TOOLKIT
-RUN echo "PATH=$PATH:/usr/local/cuda-site/bin" >> .bashrc
-RUN echo "LD_LIBRARY_PATH=/usr/local/cuda-site/lib64" >> .bashrc
-RUN . /.bashrc
-RUN ldconfig /usr/local/cuda-site/lib64
+# Install CUDA toolkit
+RUN wget $CUDA_TOOLKIT_DOWNLOAD && chmod +x $CUDA_TOOLKIT \
+&& ./$CUDA_TOOLKIT -toolkit -toolkitpath=/usr/local/cuda-site -silent -override \
+&& rm $CUDA_TOOLKIT
 
-# Install StarLab
-# Sapporo
-RUN wget --no-check-certificate $STARLAB_DOWNLOAD
-RUN tar -xvf starlabDockerPublic.tar.gz && rm starlabDockerPublic.tar.gz 
-RUN cp -r starlab starlab-no-GPU
-RUN mv starlab starlab-GPU
+# Set env variables
+RUN echo "PATH=$PATH:/usr/local/cuda-site/bin" >> .bashrc          \
+&& echo "LD_LIBRARY_PATH=/usr/local/cuda-site/lib64" >> .bashrc   \
+&& . /.bashrc \
+&& ldconfig /usr/local/cuda-site/lib64
+
+# Install StarLab w/ and w/o GPU, w/ and w/o tidal fields
+RUN tar -xvf $STARLAB_FILE && rm $STARLAB_FILE \
+&& cp -r starlab starlab-no-GPU               \
+&& cp -r starlab starlabAS-no-GPU             \
+&& cp -r starlab starlabAS-GPU                \
+&& mv starlab starlab-GPU
+
+# Tidal field version only has 5 files different, 
+# so we can copy them into a copy of the non TF version:
+
+# starlab/src/node/dyn/util/add_tidal.C
+# starlab/src/node/dyn/util/dyn_external.C
+# starlab/src/node/dyn/util/dyn_io.C
+# starlab/src/node/dyn/util/set_com.C
+# starlab/src/node/dyn/util/dyn_story.C
+
+RUN cp starlabAS/*.C starlabAS-no-GPU/src/node/dyn/util/ \
+&& cp starlabAS/*.C starlabAS-GPU/src/node/dyn/util/     \
+&& cp starlabAS/dyn.h starlabAS-no-GPU/include/          \
+&& cp starlabAS/dyn.h starlabAS-GPU/include/             \
+&& rm -rf starlabAS
+
+# Compile sapporo
 RUN cd sapporo/ && make && bash compile.sh && cd ../
 
-# With GPU
-RUN cd /starlab-GPU/ && ./configure --with-f77=no && make && make install && cd ../
-RUN mv /starlab-GPU/usr/bin slbin && rm -rf /starlab-GPU
-
-# Without GPU
-RUN cd /starlab-no-GPU/ && ./configure --with-f77=no --with-grape=no \
-                && make && make install && cd ../
-RUN mv /starlab-no-GPU/usr/bin slbin-no-GPU && rm -rf /starlab-no-GPU
+# With and w/o GPU and w/ and w/o AS tidal fields
+RUN cd /starlab-GPU/ && ./configure --with-f77=no && make && make install && cd ../ \
+&& mv /starlab-GPU/usr/bin slbin-GPU && rm -rf /starlab-GPU \
+&& cd /starlabAS-GPU/ && ./configure --with-f77=no && make && make install && cd ../ \
+&& mv /starlabAS-GPU/usr/bin slbinAS-GPU && rm -rf /starlabAS-GPU \
+&& cd /starlab-no-GPU/ && ./configure --with-f77=no --with-grape=no && make && make install && cd ../ \
+&& mv /starlab-no-GPU/usr/bin slbin-no-GPU && rm -rf /starlab-no-GPU \
+&& cd /starlabAS-no-GPU/ && ./configure --with-f77=no --with-grape=no && make && make install && cd ../ \
+&& mv /starlabAS-no-GPU/usr/bin slbinAS-no-GPU && rm -rf /starlabAS-no-GPU
 
 # Default command.
 ENTRYPOINT ["/bin/bash"]
