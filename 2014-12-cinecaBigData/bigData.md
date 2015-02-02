@@ -938,7 +938,7 @@ class: middle
 
 * The **speed** of development of python with the **speed** of execution of C++
 
-(.small[[Sebastien Binet, CNRS/IN2P3](http://go-talks.appspot.com/github.com/go-hep/talks/2015/20150121-binet-fads-hsf/go-fads.slide)])
+.small[[Sebastien Binet, CNRS/IN2P3](http://go-talks.appspot.com/github.com/go-hep/talks/2015/20150121-binet-fads-hsf/go-fads.slide)]
 
 ---
 class: middle
