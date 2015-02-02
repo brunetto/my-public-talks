@@ -943,7 +943,7 @@ class: middle
 ---
 class: middle
 .center[
-## It's pythonic (more thank python)
+## It's pythonic (more than python)
 ]
 .small[
 > The Zen of Python, by Tim Peters
@@ -1127,6 +1127,5 @@ Brunetto Ziosi
 [https://github.com/brunetto](https://github.com/brunetto)    
 [brunettoziosi.eu](brunettoziosi.eu)    
 
----
 
 
