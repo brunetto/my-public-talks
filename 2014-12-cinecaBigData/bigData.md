@@ -930,15 +930,15 @@ class: middle
 ## Try shorter...
 ]
 
-* Recursively download and install all the packages it depends on (and no Makefile needed)
+* Recursively download and install all the packages it depends on
 
-* You get a statically linked executable in a matter of seconds (even for large projects)
+* You get a statically linked executable in a matter of seconds 
 
 * Simplify deployment, distribution
 
 * **The speed of development of python with the speed of execution of C++**
 
-.small([Sebastien Binet, CNRS/IN2P3](http://go-talks.appspot.com/github.com/go-hep/talks/2015/20150121-binet-fads-hsf/go-fads.slide))
+.small[[Sebastien Binet, CNRS/IN2P3](http://go-talks.appspot.com/github.com/go-hep/talks/2015/20150121-binet-fads-hsf/go-fads.slide)]
 
 ---
 class: middle
