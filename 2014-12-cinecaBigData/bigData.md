@@ -840,14 +840,8 @@ import plotLibNew as pl
 plot = pl.newPlot("aggregatedPaper1.csv", inpath='./', outpath='./')
 
 def DCOB_mean(data, n_files):
-	# Retrieve objects when they are at minimum tgw
-	reference = np.unique(data["id"])
-	data = np.array([data[data["id"]==item][np.argmin(data[data["id"]==item]["tgw"])] for item in reference])
-	countDCOB = np.bincount(data["n"])
-	meanDCOB = countDCOB.sum() / (1.*n_files)
-	sigmaDCOB = np.sqrt(((countDCOB-meanDCOB)**2).sum() / (n_files-1))
-	sigmaSafe = [np.where(meanDCOB-sigmaDCOB>0, sigmaDCOB, meanDCOB*0.9), sigmaDCOB]
-	return None, np.array([meanDCOB]), np.array([sigmaSafe[0]]), np.array([sigmaSafe[1]])
+	...
+	return None, meanDCOB, sigmaSafe[0], sigmaSafe[1]
 
 plot.initPlot(plotType="scatter", gridRows=1, gridColumns=4, yAxisLimits=("auto", "auto"), setylog=True)
 plot.run(DCOB_mean)
