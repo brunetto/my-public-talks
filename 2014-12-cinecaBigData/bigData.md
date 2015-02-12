@@ -843,7 +843,8 @@ def DCOB_mean(data, n_files):
 	...
 	return None, meanDCOB, sigmaSafe[0], sigmaSafe[1]
 
-plot.initPlot(plotType="scatter", gridRows=1, gridColumns=4, yAxisLimits=("auto", "auto"), setylog=True)
+plot.initPlot(plotType="scatter", gridRows=1, gridColumns=4, 
+			yAxisLimits=("auto", "auto"), setylog=True)
 plot.run(DCOB_mean)
 plot.save("meanDCOBperZ")
 ```
