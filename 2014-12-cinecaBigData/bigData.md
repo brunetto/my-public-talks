@@ -721,7 +721,7 @@ sys     0m0.005s
 
 ---
 
-### Install Docker 
+### Install Docker (1)
 .citation[see [here](https://github.com/brunetto/docker-cheat-sheet#linux)]
 
 * Add docker repository key to apt-key for package verification and add repository:
@@ -741,6 +741,17 @@ sudo gpasswd -a ${USER} docker
 sudo service docker restart
 ```
 then logout and login again.
+
+---
+### Install Docker (2)
+
+* Allow memory limits: set `/etc/default/grub` key `GRUB_CMDLINE_LINUX` to 
+
+```
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+```
+
+then update GRUB with `sudo update-grub` and reboot.
 
 ---
 class: middle
