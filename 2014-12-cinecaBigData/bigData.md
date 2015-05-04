@@ -746,7 +746,7 @@ then logout and login again.
 class: middle
 ### Useful commands
 
-`docker` [attach](https://docs.docker.com/reference/commandline/cli/#attach), 
+* `docker` [attach](https://docs.docker.com/reference/commandline/cli/#attach), 
 [create](https://docs.docker.com/reference/commandline/cli/#create), 
 [exec](https://docs.docker.com/reference/commandline/cli/#exec), 
 [inspect](https://docs.docker.com/reference/commandline/cli/#inspect),
@@ -760,6 +760,9 @@ class: middle
 [stop](https://docs.docker.com/reference/commandline/cli/#stop), 
 [tag](https://docs.docker.com/reference/commandline/cli/#tag)
 
+* Inside a container, exit with `ctrl+p ctrl+q`
+
+* Attach to a running container with `docker attach <container name>`
 
 ### Other resources
 
