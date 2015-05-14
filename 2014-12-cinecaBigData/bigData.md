@@ -721,7 +721,7 @@ sys     0m0.005s
 
 ---
 
-### Install Docker 
+### Install Docker (1)
 .citation[see [here](https://github.com/brunetto/docker-cheat-sheet#linux)]
 
 * Add docker repository key to apt-key for package verification and add repository:
@@ -743,10 +743,21 @@ sudo service docker restart
 then logout and login again.
 
 ---
+### Install Docker (2)
+
+* Allow memory limits: set `/etc/default/grub` key `GRUB_CMDLINE_LINUX` to 
+
+```
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+```
+
+then update GRUB with `sudo update-grub` and reboot.
+
+---
 class: middle
 ### Useful commands
 
-`docker` [attach](https://docs.docker.com/reference/commandline/cli/#attach), 
+* `docker` [attach](https://docs.docker.com/reference/commandline/cli/#attach), 
 [create](https://docs.docker.com/reference/commandline/cli/#create), 
 [exec](https://docs.docker.com/reference/commandline/cli/#exec), 
 [inspect](https://docs.docker.com/reference/commandline/cli/#inspect),
@@ -760,6 +771,9 @@ class: middle
 [stop](https://docs.docker.com/reference/commandline/cli/#stop), 
 [tag](https://docs.docker.com/reference/commandline/cli/#tag)
 
+* Inside a container, exit with `ctrl+p ctrl+q`
+
+* Attach to a running container with `docker attach <container name>`
 
 ### Other resources
 
