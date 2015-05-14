@@ -848,6 +848,28 @@ plot.initPlot(plotType="scatter", gridRows=1, gridColumns=4,
 plot.run(DCOB_mean)
 plot.save("meanDCOBperZ")
 ```
+---
+class: middle
+## Now available JSON plugin
+
+It's easier to have
+
+* data also for histograms (each histogram with a different number of bins)
+
+* stored in a standard and human+language independent way
+
+* and use it to update plots automatically 
+
+```json
+{
+    "bh|bh:p1:H:z=0.01:bin": [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,...
+    "bh|bh:p1:H:z=0.01:counts": [0,0.015,0.04,0.07,0.0675,0.0825,0.0875,0.1,...
+    "bh|bh:p1:H:z=0.01:n_clusters": [200],
+    ...
+}
+```
+
+Available [here](https://github.com/brunetto/veuszPlugins).
 
 
 ---
